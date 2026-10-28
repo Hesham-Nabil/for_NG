@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>For You 🌙</title>
-  <meta name="description" content="A little something made just for you." />
-  <meta name="theme-color" content="#120d26" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💛</text></svg>" />
+  <title>For You 💌</title>
+  <meta name="description" content="A little letter made just for you." />
+  <meta name="theme-color" content="#f6e8e3" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Caveat:wght@500;700&family=Lalezar&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,0..100,0..1&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@600;800;900&family=Caveat:wght@600;700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="locked">
@@ -17,25 +17,24 @@
   <!-- background song -->
   <audio id="bg-music" src="assets/lovesong.mp3" loop preload="auto"></audio>
 
-  <!-- ============ INTRO GATE ============ -->
+  <!-- ============ ENVELOPE INTRO ============ -->
   <section id="gate" class="gate">
-    <div class="stars" data-count="90"></div>
-    <div class="moon"><span></span><span></span><span></span></div>
+    <div class="blob b1"></div><div class="blob b2"></div>
     <div class="gate-inner" id="gate-inner">
-      <p class="gate-ar" dir="rtl">جالك جواب 💌</p>
-      <p class="gate-kicker">you've got a letter</p>
-
-      <div class="envelope" id="envelope">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the letter">
         <div class="env-back"></div>
         <div class="env-letter">
           <span class="mini-line"></span><span class="mini-line"></span><span class="mini-line short"></span>
         </div>
         <div class="env-pocket"></div>
         <div class="env-flap"></div>
-        <button id="open-btn" class="seal" type="button" aria-label="Open the letter"><span>♥</span></button>
+        <div class="env-label">
+          <span class="env-for">A letter for</span>
+          <span class="env-name her-name">you</span>
+        </div>
+        <span class="seal" id="open-btn"><span>❤️</span></span>
       </div>
-
-      <p class="gate-hint">tap the heart to open · turn your sound on 🎧</p>
+      <p class="gate-hint" dir="rtl" lang="ar">❣ دوسي على الظرف ❣</p>
     </div>
 
     <!-- the letter that comes out of the envelope -->
@@ -53,12 +52,13 @@
   <main id="main">
 
     <!-- hero -->
-    <section class="hero scene scene--dusk" id="hero">
-      <div class="stars" data-count="60"></div>
+    <section class="hero scene scene--blush" id="hero">
+      <div class="blob b1"></div><div class="blob b2"></div>
       <div class="floaties" aria-hidden="true"></div>
       <div class="hero-inner">
-        <h1 class="hb" id="hb-title" aria-label="Happy Birthday"></h1>
-        <p class="hero-name"><span class="her-name">you</span></p>
+        <p class="hero-pov">POV:</p>
+        <h1 class="hb" id="hb-title" aria-label="he made you a whole website"></h1>
+        <p class="hero-name">happy birthday, <span class="her-name">you</span> 🎂</p>
         <p class="hero-ar" dir="rtl" lang="ar">كل سنة وانتي طيبة</p>
         <p class="hero-sub">this little corner of the internet is all yours</p>
       </div>
@@ -73,10 +73,9 @@
 
     <!-- gallery -->
     <section class="section gallery-section" id="gallery">
-      <div class="stars" data-count="50"></div>
       <header class="section-head">
         <p class="section-kicker">our favorite moments</p>
-        <h2 class="section-title"><span class="c-orange">us</span>, <span class="c-blue">in</span> <span class="c-pink">pictures</span></h2>
+        <h2 class="section-title">us, <span class="c-burgundy">in pictures</span></h2>
       </header>
       <div class="polaroids" id="photo-grid"></div>
     </section>
@@ -85,15 +84,14 @@
     <section class="section vlog-section" id="vlogs">
       <header class="section-head">
         <p class="section-kicker">press play, the song will wait for us</p>
-        <h2 class="section-title"><span class="c-yellow">our</span> <span class="c-red">vlogs</span> <span class="c-purple">&amp;</span> <span class="c-green">recaps</span></h2>
+        <h2 class="section-title">our <span class="c-burgundy">vlogs &amp; recaps</span></h2>
       </header>
       <div class="vlog-grid" id="vlog-grid"></div>
     </section>
 
     <!-- finale -->
-    <section class="scene scene--moon finale" id="finale">
-      <div class="stars" data-count="120"></div>
-      <div class="moon big"><span></span><span></span><span></span></div>
+    <section class="scene scene--blush finale" id="finale">
+      <div class="blob b1"></div><div class="blob b2"></div>
       <div class="finale-inner">
         <p class="finale-kicker">one last thing…</p>
         <div class="cake" id="cake" role="button" tabindex="0" aria-label="Blow out the candle">
@@ -104,24 +102,12 @@
         </div>
         <p class="wish-hint" id="wish-hint">tap the cake &amp; make a wish ✨</p>
         <h2 class="finale-title" id="finale-title">
-          <span class="w c-pink">happy</span> <span class="w c-orange">birthday,</span><br />
-          <span class="w c-yellow her-name">you</span>
+          <span class="w">happy</span> <span class="w">birthday,</span><br />
+          <span class="w c-burgundy her-name">you</span>
         </h2>
         <p class="finale-ar" dir="rtl" lang="ar"></p>
         <p class="signature">forever yours, <span id="from-name">me</span> ♥</p>
       </div>
-      <svg class="hill" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 60 L0 34 Q110 6 200 10 Q300 14 400 30 L400 60 Z" />
-      </svg>
-      <svg class="couple" viewBox="0 0 80 50" aria-hidden="true">
-        <!-- him -->
-        <circle cx="30" cy="11" r="8" />
-        <path d="M16 50 Q14 28 23 21 Q30 17 38 21 Q46 28 46 50 Z" />
-        <!-- her, head resting on his shoulder -->
-        <path d="M45 10 Q51 3 58 9 Q62 20 59 31 L54 27 Q48 19 45 10 Z" />
-        <circle cx="51" cy="15" r="7.2" />
-        <path d="M42 50 Q41 31 49 25 Q56 21 63 26 Q70 32 69 50 Z" />
-      </svg>
     </section>
   </main>
 

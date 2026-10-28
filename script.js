@@ -19,26 +19,26 @@ const CONFIG = {
 
   // The love message: one scene per screen, revealed word by word.
   // Wrap a word in *stars* to make it BIG. Use " / " to force a line break.
-  // theme options: sunset, night, rain, dusk, field, sunrise, moon
+  // theme (background) options: cream, blush, sand, rose, peach
   // add  lang: "ar"  for an Arabic scene (right-to-left, Arabic font)
   scenes: [
-    { theme: "sunset",  lang: "ar", tag: "كلام جوايا عمري ما قلتهولك",
+    { theme: "peach",   lang: "ar", tag: "كلام جوايا عمري ما قلتهولك",
       text: "*عارف* إني مش كامل / بس نفسي أكون *كل* حاجة *حلمتي* بيها" },
-    { theme: "night",   lang: "ar",
+    { theme: "cream",   lang: "ar",
       text: "*نفسي* أكون الراجل اللي *فاهمك* / مش بس في الحاجات *الكبيرة* / لكن في *أصغر* التفاصيل" },
-    { theme: "field",   lang: "ar",
+    { theme: "sand",    lang: "ar",
       text: "*قوليلي* إيه اللي بيضحكك / وإيه اللي بيحسسك *بالأمان* / *وعلميني* أحبك إزاي" },
-    { theme: "dusk",    lang: "ar",
+    { theme: "blush",   lang: "ar",
       text: "مش عايز *أفترض* إني عارف / *سعادتك* بالنسبالي / هي *كل* حاجة" },
-    { theme: "sunrise", lang: "ar",
+    { theme: "peach",   lang: "ar",
       text: "*عايز* أكون اللي *موجود* دايمًا / اللي بيعملها *صح* / *وبيتعلم* من غلطه" },
-    { theme: "rain",    lang: "ar",
+    { theme: "rose",    lang: "ar",
       text: "*وهفضل* دايمًا مستعد *أكبر* / *وأحبك* أعمق من *إمبارح*" },
-    { theme: "night",   lang: "ar",
+    { theme: "cream",   lang: "ar",
       text: "*احكيلي* عن *أحلامك* / وعن *خوفك* / *وأوعدك* هكون *جنبك*" },
-    { theme: "dusk",    lang: "ar",
+    { theme: "blush",   lang: "ar",
       text: "*انتي* تستاهلي حب *يليق* بيكي / *وأنا* مستعد أعمل *أي* حاجة / عشان أكون *الشخص* ده ليكي" },
-    { theme: "moon",    lang: "ar",
+    { theme: "blush",   lang: "ar",
       text: "*عشان* انتي / *رقم* *واحد* عندي 🤍" },
   ],
 
@@ -70,7 +70,7 @@ const CONFIG = {
 /* ============================================================
    You don't need to touch anything below this line
    ============================================================ */
-const COLORS = ["orange", "blue", "red", "yellow", "pink", "purple", "green"];
+const COLORS = ["ink", "burgundy", "rose", "brown"];
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const rand = (a, b) => a + Math.random() * (b - a);
@@ -109,12 +109,13 @@ function sprinkleStars(root = document) {
 (function buildHero() {
   const h = $("#hb-title");
   let i = 0;
-  ["happy", "birthday"].forEach((word, wi) => {
+  [["he made you", "ink"], ["a whole website", "burgundy"]].forEach(([line, color]) => {
     const row = document.createElement("span");
-    row.className = "row";
-    [...word].forEach((ch, ci) => {
+    row.className = "row c-" + color;
+    [...line].forEach((ch) => {
       const l = document.createElement("span");
-      l.className = `l c-${COLORS[(i + wi * 3) % COLORS.length]}` + (ci % 3 === 0 ? " wiggle" : "");
+      if (ch === " ") { l.className = "sp"; row.appendChild(l); return; }
+      l.className = "l";
       l.textContent = ch;
       l.style.setProperty("--i", i++);
       row.appendChild(l);
@@ -122,12 +123,12 @@ function sprinkleStars(root = document) {
     h.appendChild(row);
   });
   const fl = $(".floaties");
-  const bits = ["♥", "♡", "✦", "♥", "🎈", "✨", "♥"];
+  const bits = ["♥", "♡", "♥", "✿", "♥", "♡"];
   for (let k = 0; k < (innerWidth < 600 ? 14 : 24); k++) {
     const s = document.createElement("span");
     s.textContent = bits[k % bits.length];
     s.style.left = rand(0, 100) + "%";
-    s.style.color = `var(--${COLORS[k % COLORS.length]})`;
+    s.style.color = ["var(--rose)", "var(--burgundy)", "#e9a3b0"][k % 3];
     s.style.setProperty("--s", rand(14, 30) + "px");
     s.style.setProperty("--d", rand(8, 16) + "s");
     s.style.setProperty("--delay", rand(0, 12) + "s");
@@ -137,45 +138,18 @@ function sprinkleStars(root = document) {
 })();
 
 /* ---------- story scenes ---------- */
-const HILLS = `<svg class="hills" viewBox="0 0 400 100" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 100 L0 55 Q60 30 130 50 T260 45 T400 40 L400 100 Z" fill="rgba(20,30,25,.55)"/>
-  <path d="M0 100 L0 75 Q90 50 200 70 T400 62 L400 100 Z" fill="rgba(12,20,16,.85)"/></svg>`;
+const HEART = `<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.2 0 3.6 1.3 5.3 3.2 1.7-1.9 3.1-3.2 5.3-3.2 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
 
-function decorFor(theme) {
-  switch (theme) {
-    case "sunset":
-    case "sunrise": {
-      let sea = "";
-      for (let i = 0; i < 9; i++)
-        sea += `<i style="top:${10 + i * 10}%;left:${rand(10, 60)}%;width:${rand(10, 30)}%;animation-delay:${rand(0, 3).toFixed(1)}s"></i>`;
-      return `<div class="cloud" style="top:14%;width:240px;height:40px;--d:55s"></div>
-              <div class="cloud" style="top:28%;width:160px;height:28px;--d:40s;animation-delay:-20s"></div>
-              <div class="sun"></div><div class="sea">${sea}</div>`;
-    }
-    case "night":
-      return `<div class="stars" data-count="110"></div><div class="moon"><span></span><span></span><span></span></div>`;
-    case "rain": {
-      let r = "";
-      const n = innerWidth < 600 ? 40 : 80;
-      for (let i = 0; i < n; i++)
-        r += `<i style="left:${rand(0, 100)}%;--d:${rand(0.6, 1.2).toFixed(2)}s;--delay:${rand(0, 2).toFixed(2)}s"></i>`;
-      return `<div class="rain">${r}</div><div class="lamp"></div><div class="window"></div>`;
-    }
-    case "field": {
-      let f = "";
-      for (let i = 0; i < 14; i++)
-        f += `<span class="firefly" style="left:${rand(5, 95)}%;top:${rand(60, 92)}%;--d:${rand(4, 9).toFixed(1)}s;--delay:${rand(0, 4).toFixed(1)}s;--x:${rand(-40, 40)}px;--y:${rand(-60, -10)}px"></span>`;
-      return `<div class="cloud" style="top:12%;width:260px;height:50px;background:rgba(255,255,255,.45);--d:60s"></div>
-              <div class="cloud" style="top:24%;width:180px;height:36px;background:rgba(255,255,255,.35);--d:45s;animation-delay:-25s"></div>
-              ${HILLS}${f}`;
-    }
-    case "dusk":
-      return `<div class="stars" data-count="40"></div>
-              <div class="cloud" style="top:30%;width:300px;height:50px;--d:50s"></div>
-              <div class="cloud" style="top:48%;width:200px;height:34px;--d:38s;animation-delay:-15s"></div>${HILLS}`;
-    default:
-      return `<div class="stars" data-count="100"></div>`;
-  }
+function decorFor() {
+  // two soft colour blobs + a few drifting outline hearts
+  let out = `<div class="blob b1"></div><div class="blob b2"></div>`;
+  const spots = [[8, 14], [80, 10], [14, 78], [84, 72], [50, 88]];
+  spots.forEach(([x, y], k) => {
+    if (Math.random() < 0.35) return;
+    const size = rand(26, 54).toFixed(0);
+    out += `<span class="deco drift" style="left:${x + rand(-5, 5)}%;top:${y + rand(-5, 5)}%;width:${size}px;height:${size}px;--d:${rand(5, 9).toFixed(1)}s;--r0:${rand(-15, 0).toFixed(0)}deg;--r1:${rand(0, 15).toFixed(0)}deg">${HEART}</span>`;
+  });
+  return out;
 }
 
 function buildWords(text, lang) {
@@ -183,7 +157,7 @@ function buildWords(text, lang) {
   wrap.className = "words" + (lang === "ar" ? " ar" : "");
   if (lang === "ar") { wrap.dir = "rtl"; wrap.lang = "ar"; }
   let i = 0;
-  let colorStart = Math.floor(rand(0, COLORS.length));
+  let bigCount = 0, smallCount = 0;
   text.split(/\s+/).forEach((tok) => {
     if (tok === "/") {
       const br = document.createElement("span");
@@ -193,7 +167,8 @@ function buildWords(text, lang) {
     }
     const big = /^\*.*\*[,.!?،]*$/.test(tok);
     const w = document.createElement("span");
-    w.className = `w ${big ? "big" : ""} c-${COLORS[(colorStart + i) % COLORS.length]}`;
+    const color = big ? ["burgundy", "rose"][bigCount++ % 2] : ["ink", "ink", "brown"][smallCount++ % 3];
+    w.className = `w ${big ? "big" : ""} c-${color}`;
     w.textContent = tok.replace(/\*/g, "");
     w.style.setProperty("--i", i++);
     wrap.appendChild(w);
@@ -214,7 +189,7 @@ function buildWords(text, lang) {
 })();
 
 /* ---------- photos ---------- */
-const PH_COLORS = [["#ffd0dc", "#ffe3b8"], ["#cfe6ff", "#ffd6ec"], ["#ffe0b3", "#ffc2c2"], ["#e2d4ff", "#ffd9e6"], ["#d4f5e0", "#fff0b8"]];
+const PH_COLORS = [["#f8dde0", "#f9e8d6"], ["#f3e3d3", "#f6d6da"], ["#fbe9e4", "#f1d9c4"], ["#f6dcd8", "#fdf0e6"], ["#efe2d2", "#f8dfe2"]];
 
 (function buildPhotos() {
   const grid = $("#photo-grid");
@@ -257,7 +232,7 @@ const PLAY_SVG = `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="t
     card.type = "button";
     card.className = "vlog missing";
     card.style.setProperty("--delay", (idx % 2) * 0.1 + "s");
-    const [c1, c2] = [["#3b2a6b", "#a3466e"], ["#203a6b", "#7b4aa8"], ["#5a2a55", "#d0703f"], ["#1f4a5e", "#8a3d78"]][idx % 4];
+    const [c1, c2] = [["#f6d6da", "#f3e3d3"], ["#efe2d2", "#f8dde0"], ["#fbe4dc", "#f1d9c4"], ["#f8dfe2", "#efe2d2"]][idx % 4];
     card.innerHTML = `
       <div class="thumb">
         <div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">▶</span>video coming soon</div>
@@ -360,14 +335,18 @@ musicBtn.addEventListener("click", () => {
 
 /* ---------- gate ---------- */
 const gate = $("#gate");
-$("#open-btn").addEventListener("click", () => {
+const envelope = $("#envelope");
+function openEnvelope() {
+  if (envelope.classList.contains("open")) return;
   musicOn = true;
   musicPlay();   // must start inside the tap so phones allow sound
   musicBtn.hidden = false;
   $("#envelope").classList.add("open");
   setTimeout(() => gate.classList.add("letter-open"), 1500);
   setTimeout(() => { gate.classList.add("letter-shown"); $("#letter-card").removeAttribute("aria-hidden"); }, 1900);
-});
+}
+envelope.addEventListener("click", openEnvelope);
+envelope.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openEnvelope(); } });
 
 $("#letter-go").addEventListener("click", () => {
   if (musicOn && music.paused) musicPlay();
@@ -499,13 +478,13 @@ cake.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " "
 function heartBurst() {
   if (reduceMotion) return;
   const box = $("#confetti");
-  const bits = ["♥", "♥", "✦", "♡", "✨", "💛", "🎉"];
+  const bits = ["♥", "♥", "♡", "❤️", "✿", "♥"];
   const n = innerWidth < 600 ? 50 : 90;
   for (let i = 0; i < n; i++) {
     const s = document.createElement("span");
     s.textContent = bits[i % bits.length];
     s.style.left = rand(0, 100) + "vw";
-    s.style.color = `var(--${COLORS[i % COLORS.length]})`;
+    s.style.color = ["var(--rose)", "var(--burgundy)", "#e9a3b0", "#d9b089"][i % 4];
     s.style.setProperty("--s", rand(14, 30) + "px");
     s.style.setProperty("--d", rand(2.4, 4.2) + "s");
     s.style.setProperty("--delay", rand(0, 0.8) + "s");
