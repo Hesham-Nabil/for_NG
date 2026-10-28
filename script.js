@@ -2,7 +2,8 @@
    ✏️  EDIT EVERYTHING ABOUT HER RIGHT HERE
    ============================================================ */
 const CONFIG = {
-  herName: "Engy",
+  herName: "Engy",           // on the envelope, letter & cake
+  heroName: "Anouge",        // on the big "happy birthday" screen
   fromName: "Hesham",
 
   // 💌 The letter that comes out of the envelope
@@ -24,20 +25,34 @@ const CONFIG = {
       text: "I'm *not* perfect, / but for you / I want to be *everything*" },
     { bg: "cream",
       text: "I want to *understand* you, / not just the *big* things, / but every *little* detail" },
+    { bg: "blush",
+      text: "the way your *eyes* light up / when you talk about / something you *love*… / I could watch that *forever*" },
     { bg: "sand",
       text: "*tell* me what makes you *laugh*, / what makes you feel *safe*, / and *teach* me how to love you *right*" },
-    { bg: "blush",
-      text: "your *happiness* / means *everything* / to me" },
+    { bg: "rose",
+      text: "you have *no* *idea* / how often you're / on my *mind*" },
     { bg: "peach",
+      text: "*somehow* / even my most *ordinary* days / feel *softer* with you in them" },
+    { bg: "cream",
+      text: "your *happiness* / means *everything* / to me" },
+    { bg: "blush",
+      text: "I *still* get *butterflies* / every single time / your *name* lights up my phone" },
+    { bg: "sand",
       text: "I want to be the one who *shows* *up*, / who *learns*, / who *grows* with you" },
     { bg: "rose",
-      text: "and *loves* you a little *deeper* / every single *day*" },
+      text: "on your *hardest* days, / *lean* on me. / I'm *not* going *anywhere*" },
+    { bg: "peach",
+      text: "and I'll *love* you a little *deeper* / every single *day*" },
     { bg: "cream",
       text: "share your *dreams* / and your *fears* with me, / I *promise* I'll be *there*" },
     { bg: "blush",
-      text: "you *deserve* a love / that feels like *home*, / and I'll do *whatever* it takes / to be *that* for you" },
+      text: "if I had to *choose* again, / a *thousand* times over, / I'd *still* choose *you*" },
     { bg: "sand",
-      text: "because *you* are / my *number* *one* ♥" },
+      text: "you *deserve* a love / that feels like *home*, / and I'll do *whatever* it takes / to be *that* for you" },
+    { bg: "rose",
+      text: "thank you for being *you*, / for being *mine*, / for being my *favorite* *everything*" },
+    { bg: "blush",
+      text: "because *you* are / my *number* *one*, / *Anouge* ♥" },
   ],
   finaleLine: "I love you, today and every day ♥",
 
@@ -81,7 +96,7 @@ $(".finale-line").textContent = CONFIG.finaleLine;
 (function buildHero() {
   const h = $("#hb-title");
   let i = 0;
-  [["happy birthday,", "ink"], [CONFIG.herName + " ♥", "burgundy"]].forEach(([line, color]) => {
+  [["happy birthday,", "ink"], [CONFIG.heroName + " ♥", "burgundy"]].forEach(([line, color]) => {
     const row = document.createElement("span");
     row.className = "row c-" + color;
     [...line].forEach((ch) => {
