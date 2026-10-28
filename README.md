@@ -1,23 +1,35 @@
-# For her 💛
+# For Engy 💌
 
-A little birthday website: a love message revealed word by word, a photo gallery, and our vlogs & recaps, with *Lovesong* playing in the background (it pauses on its own whenever a video plays).
+A birthday website: a kraft envelope with a letter inside, a love message revealed word by word with our photos popping in, a gallery, our vlogs & recaps, and a cake that unlocks her birthday video. *Lovesong* plays in the background and pauses whenever a video plays.
 
-## Personalize it
-Open `script.js`. Everything you'd want to change is in the `CONFIG` block at the top:
-- `herName` / `fromName`
-- `scenes`: the love message (wrap a word in `*stars*` to make it big, use ` / ` for a new line)
-- `photos`: 10 captions + file names
-- `videos`: titles + file names
+## Add photos → `photos/`
+Upload them into the `photos` folder (any number). They show up automatically in the gallery **and** as little polaroids while scrolling.
+Name them `01.jpg`, `02.jpg` … so they appear in this order with these captions:
 
-## Add photos
-Put your photos in `photos/` named `01.jpg`, `02.jpg` … `10.jpg`.
-Anything missing shows a cute placeholder until you add it. Portrait photos look best (4:5).
+| file | caption |
+|---|---|
+| 01 | where it all started |
+| 02 | my favorite smile |
+| 03 | that one perfect day |
+| 04 | us being silly |
+| 05 | golden hour with you |
+| 06 | late night talks |
+| 07 | my safe place |
+| 08 | adventure buddies |
+| 09 | you, being beautiful |
+| 10 | to many more ♥ |
 
-## Add vlogs / recaps
-Put `.mp4` files in `videos/` named `vlog-01.mp4` … `vlog-04.mp4`.
-GitHub's limit is **100 MB per file**, so compress long videos first (1080p at a modest bitrate is plenty).
-Want more or fewer videos or photos? Add or remove lines in `CONFIG`.
+## Add vlogs / recaps → `videos/`
+Upload `.mp4` (or `.mov`/`.webm`) files. The file name becomes the title, so `summer-recap.mp4` shows as "summer recap".
 
-## Turn on the link (GitHub Pages)
-Repo **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` / `(root)` → Save**.
-After a minute the site is live at `https://<username>.github.io/<repo-name>/`.
+## Her birthday video → `birthday/`
+Put **one** video in the `birthday` folder. It appears after she blows out the candle.
+
+## Size limits
+GitHub's website only accepts files up to **25 MB** per upload, and git pushes up to **100 MB** per file. Compress longer videos first.
+
+## Change any text
+Everything is at the top of `script.js` in `CONFIG`: her name, the letter, the love message, captions.
+
+## Turn on the link
+Repo **Settings → Pages → Deploy from a branch → `main` / `(root)` → Save**.

@@ -2,108 +2,80 @@
    ✏️  EDIT EVERYTHING ABOUT HER RIGHT HERE
    ============================================================ */
 const CONFIG = {
-  herName: "my love",        // her name or nickname
-  fromName: "Hesham",        // how you sign it
+  herName: "Engy",
+  fromName: "Hesham",
 
-  // 💌 The letter that comes out of the envelope (Arabic)
+  // 💌 The letter that comes out of the envelope
   letter: {
-    hello: "إلى أحلى حد في الدنيا 🤍",
+    hello: "To Engy, my favorite person 🤍",
     body: [
-      "كل سنة وانتي طيبة يا حبيبتي، وكل سنة وانتي معايا.",
-      "عملتلك الحتة الصغيرة دي من الإنترنت عشان أقولك كل الكلام اللي ساعات بيقف على لساني ومش بعرف أقوله.",
-      "علّي الصوت، وانزلي على مهلك… كل حاجة هنا معمولة عشانك.",
+      "Happy birthday, my love.",
+      "I made you this little corner of the internet, because some things are easier to show than to say.",
+      "Turn your sound on, scroll slowly, and remember: every bit of this is for you.",
     ],
-    sign: "— بحبك، هشام",
+    sign: "— yours, always. Hesham",
   },
-  finaleArabic: "وكل سنة وانتي حبيبتي 🤍",
 
-  // The love message: one scene per screen, revealed word by word.
-  // Wrap a word in *stars* to make it BIG. Use " / " to force a line break.
-  // theme (background) options: cream, blush, sand, rose, peach
-  // add  lang: "ar"  for an Arabic scene (right-to-left, Arabic font)
+  // The love message: one screen per scene, revealed word by word.
+  // Wrap a word in *stars* to make it BIG. Use " / " for a new line.
+  // background options: cream, blush, sand, rose, peach
   scenes: [
-    { theme: "peach",   lang: "ar", tag: "كلام جوايا عمري ما قلتهولك",
-      text: "*عارف* إني مش كامل / بس نفسي أكون *كل* حاجة *حلمتي* بيها" },
-    { theme: "cream",   lang: "ar",
-      text: "*نفسي* أكون الراجل اللي *فاهمك* / مش بس في الحاجات *الكبيرة* / لكن في *أصغر* التفاصيل" },
-    { theme: "sand",    lang: "ar",
-      text: "*قوليلي* إيه اللي بيضحكك / وإيه اللي بيحسسك *بالأمان* / *وعلميني* أحبك إزاي" },
-    { theme: "blush",   lang: "ar",
-      text: "مش عايز *أفترض* إني عارف / *سعادتك* بالنسبالي / هي *كل* حاجة" },
-    { theme: "peach",   lang: "ar",
-      text: "*عايز* أكون اللي *موجود* دايمًا / اللي بيعملها *صح* / *وبيتعلم* من غلطه" },
-    { theme: "rose",    lang: "ar",
-      text: "*وهفضل* دايمًا مستعد *أكبر* / *وأحبك* أعمق من *إمبارح*" },
-    { theme: "cream",   lang: "ar",
-      text: "*احكيلي* عن *أحلامك* / وعن *خوفك* / *وأوعدك* هكون *جنبك*" },
-    { theme: "blush",   lang: "ar",
-      text: "*انتي* تستاهلي حب *يليق* بيكي / *وأنا* مستعد أعمل *أي* حاجة / عشان أكون *الشخص* ده ليكي" },
-    { theme: "blush",   lang: "ar",
-      text: "*عشان* انتي / *رقم* *واحد* عندي 🤍" },
+    { bg: "peach", tag: "things I never said out loud",
+      text: "I'm *not* perfect, / but for you / I want to be *everything*" },
+    { bg: "cream",
+      text: "I want to *understand* you, / not just the *big* things, / but every *little* detail" },
+    { bg: "sand",
+      text: "*tell* me what makes you *laugh*, / what makes you feel *safe*, / and *teach* me how to love you *right*" },
+    { bg: "blush",
+      text: "your *happiness* / means *everything* / to me" },
+    { bg: "peach",
+      text: "I want to be the one who *shows* *up*, / who *learns*, / who *grows* with you" },
+    { bg: "rose",
+      text: "and *loves* you a little *deeper* / every single *day*" },
+    { bg: "cream",
+      text: "share your *dreams* / and your *fears* with me, / I *promise* I'll be *there*" },
+    { bg: "blush",
+      text: "you *deserve* a love / that feels like *home*, / and I'll do *whatever* it takes / to be *that* for you" },
+    { bg: "sand",
+      text: "because *you* are / my *number* *one* ♥" },
   ],
+  finaleLine: "I love you, today and every day ♥",
 
-  // 📸 Photos: drop your pictures in the /photos folder with these names
-  // (or change the names here). Any missing file shows a cute placeholder.
-  photos: [
-    { src: "photos/01.jpg", caption: "where it all started" },
-    { src: "photos/02.jpg", caption: "my favorite smile" },
-    { src: "photos/03.jpg", caption: "that one perfect day" },
-    { src: "photos/04.jpg", caption: "us being silly" },
-    { src: "photos/05.jpg", caption: "golden hour with you" },
-    { src: "photos/06.jpg", caption: "late night talks" },
-    { src: "photos/07.jpg", caption: "my safe place" },
-    { src: "photos/08.jpg", caption: "adventure buddies" },
-    { src: "photos/09.jpg", caption: "you, being beautiful" },
-    { src: "photos/10.jpg", caption: "to many more ♥" },
+  // 📁 Photos & videos load AUTOMATICALLY from the /photos and /videos folders.
+  // Just upload files there (any names). Supported: jpg, jpeg, png, webp, gif / mp4, webm, mov
+  // Photos are shown in file-name order (01.jpg, 02.jpg, …) and get these captions in the same order.
+  photoCaptions: [
+    "where it all started", "my favorite smile", "that one perfect day", "us being silly",
+    "golden hour with you", "late night talks", "my safe place", "adventure buddies",
+    "you, being beautiful", "to many more ♥",
   ],
-
-  // 🎬 Vlogs & recaps: drop .mp4 files in the /videos folder.
-  // poster is optional (a .jpg thumbnail); leave "" to use the video's first frame.
-  videos: [
-    { src: "videos/vlog-01.mp4", poster: "", title: "our first vlog",      note: "the beginning of us" },
-    { src: "videos/vlog-02.mp4", poster: "", title: "summer recap",        note: "sun, snacks & you" },
-    { src: "videos/vlog-03.mp4", poster: "", title: "that trip together",  note: "my favorite adventure" },
-    { src: "videos/vlog-04.mp4", poster: "", title: "random days with you", note: "the little moments" },
-  ],
+  // Extra captions for any photos beyond the list above
+  moreCaptions: ["us ♥", "my favorite view", "my person", "core memory", "you & me", "always us"],
+  // Optional: caption a specific file by name, e.g. "beach.jpg": "our beach day" (works for videos too)
+  captions: {},
+  videoPlaceholders: 6,
+  // where the site lives on GitHub (used to read the folders)
+  github: { owner: "Hesham-Nabil", repo: "for_NG", branch: "main" },
 };
 
 /* ============================================================
    You don't need to touch anything below this line
    ============================================================ */
-const COLORS = ["ink", "burgundy", "rose", "brown"];
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const rand = (a, b) => a + Math.random() * (b - a);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const IMG_EXT = /\.(jpe?g|png|webp|gif|avif)$/i;
+const VID_EXT = /\.(mp4|webm|mov|m4v)$/i;
 
-/* ---------- names ---------- */
+/* ---------- names & letter ---------- */
 $$(".her-name").forEach((el) => (el.textContent = CONFIG.herName));
 $("#from-name").textContent = CONFIG.fromName;
-document.title = `For ${CONFIG.herName} 🌙`;
-$(".ar-hello").textContent = CONFIG.letter.hello;
-$(".ar-body").innerHTML = CONFIG.letter.body.map((t) => `<p>${t}</p>`).join("");
-$(".ar-sign").textContent = CONFIG.letter.sign;
-$(".finale-ar").textContent = CONFIG.finaleArabic;
-
-/* ---------- stars ---------- */
-function sprinkleStars(root = document) {
-  $$(".stars", root).forEach((box) => {
-    if (box.dataset.done) return;
-    box.dataset.done = 1;
-    const n = Number(box.dataset.count || 60) * (innerWidth < 600 ? 0.6 : 1);
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < n; i++) {
-      const s = document.createElement("i");
-      s.className = "star" + (Math.random() < 0.15 ? " lg" : "");
-      s.style.left = rand(0, 100) + "%";
-      s.style.top = rand(0, 75) + "%";
-      s.style.setProperty("--d", rand(2, 5).toFixed(2) + "s");
-      s.style.setProperty("--delay", rand(0, 5).toFixed(2) + "s");
-      frag.appendChild(s);
-    }
-    box.appendChild(frag);
-  });
-}
+document.title = `For ${CONFIG.herName} 💌`;
+$(".letter-hello").textContent = CONFIG.letter.hello;
+$(".letter-body").innerHTML = CONFIG.letter.body.map((t) => `<p>${t}</p>`).join("");
+$(".letter-sign").textContent = CONFIG.letter.sign;
+$(".finale-line").textContent = CONFIG.finaleLine;
 
 /* ---------- hero title ---------- */
 (function buildHero() {
@@ -140,24 +112,20 @@ function sprinkleStars(root = document) {
 /* ---------- story scenes ---------- */
 const HEART = `<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.2 0 3.6 1.3 5.3 3.2 1.7-1.9 3.1-3.2 5.3-3.2 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
 
-function decorFor() {
-  // two soft colour blobs + a few drifting outline hearts
+function decor() {
   let out = `<div class="blob b1"></div><div class="blob b2"></div>`;
-  const spots = [[8, 14], [80, 10], [14, 78], [84, 72], [50, 88]];
-  spots.forEach(([x, y], k) => {
-    if (Math.random() < 0.35) return;
-    const size = rand(26, 54).toFixed(0);
-    out += `<span class="deco drift" style="left:${x + rand(-5, 5)}%;top:${y + rand(-5, 5)}%;width:${size}px;height:${size}px;--d:${rand(5, 9).toFixed(1)}s;--r0:${rand(-15, 0).toFixed(0)}deg;--r1:${rand(0, 15).toFixed(0)}deg">${HEART}</span>`;
+  [[10, 42], [86, 36], [50, 92]].forEach(([x, y]) => {
+    if (Math.random() < 0.4) return;
+    const size = rand(24, 46).toFixed(0);
+    out += `<span class="deco drift" style="left:${x + rand(-4, 4)}%;top:${y + rand(-4, 4)}%;width:${size}px;height:${size}px;--d:${rand(5, 9).toFixed(1)}s;--r0:${rand(-15, 0).toFixed(0)}deg;--r1:${rand(0, 15).toFixed(0)}deg">${HEART}</span>`;
   });
   return out;
 }
 
-function buildWords(text, lang) {
+function buildWords(text) {
   const wrap = document.createElement("div");
-  wrap.className = "words" + (lang === "ar" ? " ar" : "");
-  if (lang === "ar") { wrap.dir = "rtl"; wrap.lang = "ar"; }
+  wrap.className = "words";
   let i = 0;
-  let bigCount = 0, smallCount = 0;
   text.split(/\s+/).forEach((tok) => {
     if (tok === "/") {
       const br = document.createElement("span");
@@ -165,10 +133,9 @@ function buildWords(text, lang) {
       wrap.appendChild(br);
       return;
     }
-    const big = /^\*.*\*[,.!?،]*$/.test(tok);
+    const big = /^\*.*\*[,.!?]*$/.test(tok);
     const w = document.createElement("span");
-    const color = big ? ["burgundy", "rose"][bigCount++ % 2] : ["ink", "ink", "brown"][smallCount++ % 3];
-    w.className = `w ${big ? "big" : ""} c-${color}`;
+    w.className = big ? "w big c-burgundy" : "w c-ink";
     w.textContent = tok.replace(/\*/g, "");
     w.style.setProperty("--i", i++);
     wrap.appendChild(w);
@@ -176,100 +143,186 @@ function buildWords(text, lang) {
   return wrap;
 }
 
-(function buildStory() {
-  const story = $("#story");
-  CONFIG.scenes.forEach((sc) => {
-    const sec = document.createElement("section");
-    sec.className = `scene scene--${sc.theme} story-scene`;
-    const tagCls = sc.lang === "ar" ? "scene-tag ar" : "scene-tag";
-    sec.innerHTML = decorFor(sc.theme) + (sc.tag ? `<p class="${tagCls}">${sc.tag}</p>` : "");
-    sec.appendChild(buildWords(sc.text, sc.lang));
-    story.appendChild(sec);
-  });
-})();
+const storyScenes = CONFIG.scenes.map((sc) => {
+  const sec = document.createElement("section");
+  sec.className = `scene scene--${sc.bg || "cream"} story-scene`;
+  sec.innerHTML = decor() + (sc.tag ? `<p class="scene-tag">${sc.tag}</p>` : "");
+  sec.appendChild(buildWords(sc.text));
+  $("#story").appendChild(sec);
+  return sec;
+});
 
-/* ---------- photos ---------- */
+/* ============================================================
+   Load photos & videos from the folders
+   ============================================================ */
+async function listFolder(folder, extRe) {
+  // 1) ask GitHub what's in the folder (works on GitHub Pages, no list to maintain)
+  const host = location.hostname;
+  let { owner, repo, branch } = CONFIG.github;
+  if (host.endsWith(".github.io")) {
+    owner = host.split(".")[0];
+    const first = location.pathname.split("/").filter(Boolean)[0];
+    if (first && !first.includes(".")) repo = first;
+  }
+  try {
+    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}?ref=${branch}`, { headers: { Accept: "application/vnd.github+json" } });
+    if (r.ok) {
+      const items = await r.json();
+      const files = items.filter((it) => it.type === "file" && extRe.test(it.name)).map((it) => it.name);
+      if (files.length) return sortNames(files).map((n) => `${folder}/${encodeURIComponent(n)}`);
+    }
+  } catch (e) { /* fall through */ }
+  // 2) fallback: a list.json inside the folder
+  try {
+    const r = await fetch(`${folder}/list.json`, { cache: "no-store" });
+    if (r.ok) {
+      const names = (await r.json()).filter((n) => extRe.test(n));
+      return names.map((n) => `${folder}/${encodeURIComponent(n)}`);
+    }
+  } catch (e) { /* nothing */ }
+  return [];
+}
+function sortNames(arr) {
+  return arr.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
+}
+function fileName(path) { return decodeURIComponent(path.split("/").pop()); }
+function prettyTitle(path) {
+  const base = fileName(path).replace(/\.[^.]+$/, "");
+  if (/^(img|dsc|vid|pxl|mvimg|screenshot|whatsapp|snapchat)?[\W_]*\d[\d\W_]*$/i.test(base) || /^(IMG|VID|PXL|DSC)[_-]/i.test(base)) return "";
+  return base.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+let PHOTOS = [];
 const PH_COLORS = [["#f8dde0", "#f9e8d6"], ["#f3e3d3", "#f6d6da"], ["#fbe9e4", "#f1d9c4"], ["#f6dcd8", "#fdf0e6"], ["#efe2d2", "#f8dfe2"]];
 
-(function buildPhotos() {
+function defaultCaption(idx) {
+  const pc = CONFIG.photoCaptions;
+  return idx < pc.length ? pc[idx] : CONFIG.moreCaptions[(idx - pc.length) % CONFIG.moreCaptions.length];
+}
+function photoCaption(path, idx) {
+  const name = fileName(path);
+  return CONFIG.captions[name] || defaultCaption(idx);
+}
+
+function renderGallery() {
   const grid = $("#photo-grid");
-  CONFIG.photos.forEach((p, idx) => {
+  grid.innerHTML = "";
+  const list = PHOTOS.length ? PHOTOS : Array.from({ length: 10 }, () => null);
+  list.forEach((src, idx) => {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "polaroid missing";
+    btn.className = "polaroid " + (src ? "has-media" : "missing");
     btn.style.setProperty("--rot", (idx % 2 ? 1 : -1) * rand(1.5, 4) + "deg");
     btn.style.setProperty("--delay", (idx % 5) * 0.08 + "s");
     const [c1, c2] = PH_COLORS[idx % PH_COLORS.length];
+    const cap = src ? photoCaption(src, idx) : defaultCaption(idx);
     btn.innerHTML = `
       <span class="tape"></span>
       <figure style="margin:0">
         <div class="ph">
-          <div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">♥</span>photo ${idx + 1}</div>
+          ${src ? `<img src="${src}" alt="${cap}" loading="lazy" decoding="async" />`
+                : `<div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">♥</span>photo ${idx + 1}</div>`}
         </div>
-        <figcaption>${p.caption || ""}</figcaption>
+        <figcaption>${cap}</figcaption>
       </figure>`;
-    const img = new Image();
-    img.alt = p.caption || `photo ${idx + 1}`;
-    img.decoding = "async";
-    img.onload = () => {
-      btn.classList.remove("missing");
-      btn.classList.add("has-media");
-      $(".ph", btn).prepend(img);
-    };
-    img.src = p.src;
-    btn.addEventListener("click", () => openPhoto(idx));
+    btn.addEventListener("click", () => openPhoto(idx, btn));
     grid.appendChild(btn);
+    io.observe(btn);
   });
-})();
+}
+
+function addSnippets() {
+  if (!PHOTOS.length) return;
+  // spread the photos across the scenes, 2 per screen, without repeating when possible
+  const order = [...PHOTOS].sort(() => Math.random() - 0.5);
+  let k = 0;
+  storyScenes.forEach((sec, i) => {
+    const slots = i % 2 ? ["p2", "p3"] : ["p0", "p1"];
+    slots.forEach((slot, j) => {
+      const src = order[k++ % order.length];
+      const fig = document.createElement("figure");
+      fig.className = `snip ${slot}`;
+      fig.style.setProperty("--rot", (j ? 1 : -1) * rand(4, 9) + "deg");
+      fig.innerHTML = `<img src="${src}" alt="" loading="lazy" decoding="async" />`;
+      sec.appendChild(fig);
+    });
+  });
+  // gentle parallax while scrolling
+  const snips = $$(".snip");
+  let ticking = false;
+  const update = () => {
+    const vh = innerHeight;
+    snips.forEach((s) => {
+      const r = s.parentElement.getBoundingClientRect();
+      const p = (r.top + r.height / 2 - vh / 2) / vh;      // -1 .. 1 around the centre
+      s.style.setProperty("--py", (p * (s.classList.contains("p1") || s.classList.contains("p3") ? 60 : -60)).toFixed(1) + "px");
+    });
+    ticking = false;
+  };
+  if (!reduceMotion) {
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+}
 
 /* ---------- vlogs ---------- */
 const PLAY_SVG = `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>`;
+const VLOG_COLORS = [["#f6d6da", "#f3e3d3"], ["#efe2d2", "#f8dde0"], ["#fbe4dc", "#f1d9c4"], ["#f8dfe2", "#efe2d2"]];
 
-(function buildVlogs() {
+function renderVlogs(videos) {
   const grid = $("#vlog-grid");
-  CONFIG.videos.forEach((v, idx) => {
+  grid.innerHTML = "";
+  const list = videos.length ? videos : Array.from({ length: CONFIG.videoPlaceholders }, () => null);
+  list.forEach((src, idx) => {
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "vlog missing";
+    card.className = "vlog " + (src ? "has-media" : "missing");
     card.style.setProperty("--delay", (idx % 2) * 0.1 + "s");
-    const [c1, c2] = [["#f6d6da", "#f3e3d3"], ["#efe2d2", "#f8dde0"], ["#fbe4dc", "#f1d9c4"], ["#f8dfe2", "#efe2d2"]][idx % 4];
+    const [c1, c2] = VLOG_COLORS[idx % 4];
+    const title = src ? (CONFIG.captions[fileName(src)] || prettyTitle(src) || `recap #${idx + 1}`) : "video coming soon";
     card.innerHTML = `
       <div class="thumb">
-        <div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">▶</span>video coming soon</div>
+        ${src ? "" : `<div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">▶</span>add a vlog to the videos folder</div>`}
         <span class="play">${PLAY_SVG}</span>
       </div>
-      <div class="vlog-meta"><h3>${v.title}</h3><p>${v.note || ""}</p></div>`;
-    const thumb = $(".thumb", card);
-    const markReady = () => { card.classList.remove("missing"); card.classList.add("has-media"); };
-    if (v.poster) {
-      const img = new Image();
-      img.alt = "";
-      img.onload = markReady;
-      img.src = v.poster;
-      thumb.prepend(img);
+      <div class="vlog-meta"><h3>${title}</h3><p>${src ? "tap to watch ♥" : "soon ♥"}</p></div>`;
+    if (src) {
+      const probe = document.createElement("video");
+      probe.muted = true;
+      probe.playsInline = true;
+      probe.preload = "metadata";
+      probe.src = src + "#t=0.5";
+      probe.setAttribute("aria-hidden", "true");
+      probe.tabIndex = -1;
+      $(".thumb", card).prepend(probe);
+      card.addEventListener("click", () => openVideo(src, title));
+    } else {
+      card.addEventListener("click", () =>
+        card.animate([{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }], { duration: 300 }));
     }
-    // probe the video file (also gives a first-frame thumbnail when no poster)
-    const probe = document.createElement("video");
-    probe.muted = true;
-    probe.playsInline = true;
-    probe.preload = "metadata";
-    probe.addEventListener("loadedmetadata", markReady, { once: true });
-    probe.src = v.src + "#t=0.5";
-    probe.setAttribute("aria-hidden", "true");
-    probe.tabIndex = -1;
-    if (!v.poster) thumb.prepend(probe);
-    card.addEventListener("click", () => {
-      if (card.classList.contains("missing")) {
-        card.animate([{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }], { duration: 300 });
-        return;
-      }
-      openVideo(v);
-    });
     grid.appendChild(card);
+    io.observe(card);
   });
-})();
+}
 
-sprinkleStars();
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  });
+}, { threshold: 0.3 });
+storyScenes.forEach((el) => io.observe(el));
+
+// first paint with placeholders, then fill from the folders
+renderGallery();
+renderVlogs([]);
+listFolder("photos", IMG_EXT).then((list) => {
+  PHOTOS = list;
+  if (list.length) { renderGallery(); addSnippets(); }
+});
+listFolder("videos", VID_EXT).then((list) => { if (list.length) renderVlogs(list); });
 
 /* ============================================================
    Music: plays in the background, pauses while any video plays
@@ -285,7 +338,6 @@ function setBtn(playing) {
   musicBtn.classList.toggle("playing", playing);
   musicBtn.setAttribute("aria-label", playing ? "Pause music" : "Play music");
 }
-
 function fadeTo(target, ms, done) {
   clearInterval(fadeTimer);
   const start = music.volume;
@@ -297,7 +349,6 @@ function fadeTo(target, ms, done) {
     if (n >= steps) { clearInterval(fadeTimer); done && done(); }
   }, 40);
 }
-
 function musicPlay() {
   music.volume = 0;
   const p = music.play();
@@ -309,31 +360,28 @@ function musicPause(fast) {
   fadeTo(0, fast ? 250 : 600, () => music.pause());
   setBtn(false);
 }
-
 function anyVideoPlaying() {
   return $$("video").some((v) => !v.paused && !v.ended && !v.muted);
 }
-
+function maybeResumeMusic() {
+  setTimeout(() => { if (musicOn && !anyVideoPlaying() && music.paused) musicPlay(); }, 150);
+}
 // capture-phase listeners catch play/pause from every <video> on the page
 document.addEventListener("play", (e) => {
   if (e.target.tagName === "VIDEO" && !e.target.muted && !music.paused) musicPause(true);
 }, true);
-function maybeResumeMusic() {
-  setTimeout(() => { if (musicOn && !anyVideoPlaying() && music.paused) musicPlay(); }, 150);
-}
 ["pause", "ended"].forEach((evt) =>
   document.addEventListener(evt, (e) => {
     if (e.target.tagName === "VIDEO" && !e.target.muted) maybeResumeMusic();
   }, true)
 );
-
 musicBtn.addEventListener("click", () => {
   musicOn = !musicOn;
   if (musicOn && !anyVideoPlaying()) musicPlay();
   else musicPause();
 });
 
-/* ---------- gate ---------- */
+/* ---------- envelope → letter → site ---------- */
 const gate = $("#gate");
 const envelope = $("#envelope");
 function openEnvelope() {
@@ -341,7 +389,7 @@ function openEnvelope() {
   musicOn = true;
   musicPlay();   // must start inside the tap so phones allow sound
   musicBtn.hidden = false;
-  $("#envelope").classList.add("open");
+  envelope.classList.add("open");
   setTimeout(() => gate.classList.add("letter-open"), 1500);
   setTimeout(() => { gate.classList.add("letter-shown"); $("#letter-card").removeAttribute("aria-hidden"); }, 1900);
 }
@@ -356,18 +404,8 @@ $("#letter-go").addEventListener("click", () => {
   setTimeout(() => nowPlaying.classList.add("hide"), 4500);
   $("#hb-title").classList.add("go");
   setTimeout(() => $("#hero").classList.add("in"), 50);
-  setTimeout(() => $("#gate").remove(), 1300);
+  setTimeout(() => gate.remove(), 1300);
 });
-
-/* ============================================================
-   Reveal on scroll
-   ============================================================ */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((en) => {
-    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-  });
-}, { threshold: 0.35 });
-$$(".story-scene, .polaroid, .vlog").forEach((el) => io.observe(el));
 
 /* ============================================================
    Photo lightbox
@@ -377,19 +415,15 @@ const photoImg = $("#photo-modal-img");
 const photoCap = $("#photo-modal-cap");
 let photoIdx = 0;
 
-function availablePhotos() {
-  return $$(".polaroid").map((el, i) => (el.classList.contains("has-media") ? i : -1)).filter((i) => i >= 0);
-}
 function showPhoto(i) {
   photoIdx = i;
-  const p = CONFIG.photos[i];
-  photoImg.src = p.src;
-  photoImg.alt = p.caption || "";
-  photoCap.textContent = p.caption || "";
+  photoImg.src = PHOTOS[i];
+  const cap = photoCaption(PHOTOS[i], i);
+  photoImg.alt = cap;
+  photoCap.textContent = cap;
 }
-function openPhoto(i) {
-  const card = $$(".polaroid")[i];
-  if (!card.classList.contains("has-media")) {
+function openPhoto(i, card) {
+  if (!PHOTOS.length) {
     card.animate([{ transform: "rotate(0) scale(1)" }, { transform: "rotate(-4deg) scale(1.05)" }, { transform: "rotate(3deg) scale(1.05)" }, { transform: "rotate(0) scale(1)" }], { duration: 400 });
     return;
   }
@@ -397,15 +431,12 @@ function openPhoto(i) {
   openModal(photoModal);
 }
 function stepPhoto(dir) {
-  const list = availablePhotos();
-  if (!list.length) return;
-  const pos = list.indexOf(photoIdx);
-  showPhoto(list[(pos + dir + list.length) % list.length]);
+  if (!PHOTOS.length) return;
+  showPhoto((photoIdx + dir + PHOTOS.length) % PHOTOS.length);
 }
 $("#photo-prev").addEventListener("click", (e) => { e.stopPropagation(); stepPhoto(-1); });
 $("#photo-next").addEventListener("click", (e) => { e.stopPropagation(); stepPhoto(1); });
 
-// swipe on phones
 let touchX = null;
 photoModal.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
 photoModal.addEventListener("touchend", (e) => {
@@ -421,10 +452,9 @@ photoModal.addEventListener("touchend", (e) => {
 const videoModal = $("#video-modal");
 const player = $("#video-player");
 
-function openVideo(v) {
-  player.src = v.src;
-  if (v.poster) player.poster = v.poster; else player.removeAttribute("poster");
-  $("#video-title").textContent = v.title;
+function openVideo(src, title) {
+  player.src = src;
+  $("#video-title").textContent = title;
   openModal(videoModal);
   const p = player.play();
   if (p && p.catch) p.catch(() => {});
@@ -466,11 +496,53 @@ document.addEventListener("keydown", (e) => {
    Finale: blow out the candle
    ============================================================ */
 const cake = $("#cake");
+const wishHint = $("#wish-hint");
+let cakeTaps = 0;
+let typeTimer = null;
+
+function typeText(el, text, speed = 55) {
+  clearInterval(typeTimer);
+  el.innerHTML = "";
+  const span = document.createElement("span");
+  const caret = document.createElement("span");
+  caret.className = "caret";
+  el.append(span, caret);
+  let i = 0;
+  typeTimer = setInterval(() => {
+    span.textContent = text.slice(0, ++i);
+    if (i >= text.length) clearInterval(typeTimer);
+  }, speed);
+}
+
 function blowCandle() {
   if (cake.classList.contains("out")) return;
+  cakeTaps++;
+  if (cakeTaps === 1) {
+    // first tap: nothing happens yet, just a little nudge
+    wishHint.classList.add("nudge");
+    typeText(wishHint, "Make a wish first :)");
+    cake.classList.remove("shake"); void cake.offsetWidth; cake.classList.add("shake");
+    return;
+  }
+  clearInterval(typeTimer);
   cake.classList.add("out");
   $("#finale").classList.add("wished");
   heartBurst();
+  showBirthdayVideo();
+}
+
+let BDAY_SRC = null;
+listFolder("birthday", VID_EXT).then((list) => { BDAY_SRC = list[0] || null; });
+function showBirthdayVideo() {
+  const box = $("#bday-video");
+  const reveal = () => {
+    if (!BDAY_SRC) return;
+    $("#bday-player").src = BDAY_SRC + "#t=0.1";
+    box.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add("show")));
+    setTimeout(() => box.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }), 900);
+  };
+  setTimeout(reveal, 2600);
 }
 cake.addEventListener("click", blowCandle);
 cake.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); blowCandle(); } });

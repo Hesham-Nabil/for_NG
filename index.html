@@ -9,7 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@600;800;900&family=Caveat:wght@600;700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="locked">
@@ -34,17 +34,17 @@
         </div>
         <span class="seal" id="open-btn"><span>❤️</span></span>
       </div>
-      <p class="gate-hint" dir="rtl" lang="ar">❣ دوسي على الظرف ❣</p>
+      <p class="gate-hint">♡ tap the envelope ♡</p>
     </div>
 
     <!-- the letter that comes out of the envelope -->
     <article class="letter-card" id="letter-card" aria-hidden="true">
-      <div class="letter-paper" dir="rtl" lang="ar">
-        <p class="ar-hello"></p>
-        <div class="ar-body"></div>
-        <p class="ar-sign"></p>
+      <div class="letter-paper">
+        <p class="letter-hello"></p>
+        <div class="letter-body"></div>
+        <p class="letter-sign"></p>
       </div>
-      <button class="letter-go" id="letter-go" type="button">يلا نبدأ <span>♥</span></button>
+      <button class="letter-go" id="letter-go" type="button">let's begin <span>♥</span></button>
     </article>
   </section>
 
@@ -59,7 +59,6 @@
         <p class="hero-pov">POV:</p>
         <h1 class="hb" id="hb-title" aria-label="he made you a whole website"></h1>
         <p class="hero-name">happy birthday, <span class="her-name">you</span> 🎂</p>
-        <p class="hero-ar" dir="rtl" lang="ar">كل سنة وانتي طيبة</p>
         <p class="hero-sub">this little corner of the internet is all yours</p>
       </div>
       <a class="scroll-cue" href="#story" aria-label="Scroll down">
@@ -105,8 +104,14 @@
           <span class="w">happy</span> <span class="w">birthday,</span><br />
           <span class="w c-burgundy her-name">you</span>
         </h2>
-        <p class="finale-ar" dir="rtl" lang="ar"></p>
+        <p class="finale-line"></p>
         <p class="signature">forever yours, <span id="from-name">me</span> ♥</p>
+        <div class="bday-video" id="bday-video" hidden>
+          <p class="bday-kicker">and one more surprise… 🎂</p>
+          <div class="bday-frame">
+            <video id="bday-player" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
       </div>
     </section>
   </main>
