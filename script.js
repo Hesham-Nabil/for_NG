@@ -66,8 +66,12 @@ const CONFIG = {
     "us being silly 😎", "sunset drives", "my safe place", "date night",
     "so proud of you 🎓", "you're my favorite channel", "our kind of night out", "the way you make me laugh",
     "my favorite passenger", "snowy days with you ❄️", "night walks with you", "to many more ♥",
+    "shopping dates", "all dressed up", "cheering together 🇪🇬", "board game dates 🎲",
+    "car selfies forever", "co-pilot of my life", "little adventures", "late-night drives",
+    "snowfall with you", "Brooklyn Bridge with you 🌉", "you & your teddy 🧸", "my favorite selfie",
+    "celebrating you", "E & H ♥", "kids at heart", "coffee dates ☕", "my graduate 🎓",
   ],
-  photosPerPage: 12,
+  photosPerPage: 24,
   // Extra captions for any photos beyond the list above
   moreCaptions: ["us ♥", "my favorite view", "my person", "core memory", "you & me", "always us"],
   // Optional: caption a specific file by name, e.g. "beach.jpg": "our beach day" (works for videos too)
@@ -203,6 +207,9 @@ async function listFolder(folder, extRe) {
 function sortNames(arr) {
   return arr.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
 }
+// small version for the grid & scroll polaroids (falls back to the full photo if missing)
+function thumb(src) { return src.replace(/^photos\//, "photos/thumbs/"); }
+const THUMB_FALLBACK = `onerror="if(!this.dataset.f){this.dataset.f=1;this.src=this.dataset.full}"`;
 function fileName(path) { return decodeURIComponent(path.split("/").pop()); }
 function prettyTitle(path) {
   const base = fileName(path).replace(/\.[^.]+$/, "");
@@ -245,7 +252,7 @@ function renderGallery(scroll) {
       <span class="tape"></span>
       <figure style="margin:0">
         <div class="ph">
-          ${src ? `<img src="${src}" alt="${cap}" loading="lazy" decoding="async" />`
+          ${src ? `<img src="${thumb(src)}" data-full="${src}" ${THUMB_FALLBACK} alt="${cap}" loading="lazy" decoding="async" />`
                 : `<div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">♥</span>photo ${idx + 1}</div>`}
         </div>
         <figcaption>${cap}</figcaption>
@@ -280,11 +287,17 @@ function addSnippets() {
   storyScenes.forEach((sec, i) => {
     const slots = i % 2 ? ["p2", "p3"] : ["p0", "p1"];
     slots.forEach((slot, j) => {
-      const src = order[k++ % order.length];
+      if (k >= order.length) return;          // never show the same photo twice
+      const src = order[k++];
       const fig = document.createElement("figure");
       fig.className = `snip ${slot}`;
       fig.style.setProperty("--rot", (j ? 1 : -1) * rand(4, 9) + "deg");
-      fig.innerHTML = `<img src="${src}" alt="" loading="lazy" decoding="async" />`;
+      fig.innerHTML = `<img src="${thumb(src)}" data-full="${src}" ${THUMB_FALLBACK} alt="${photoCaption(src, PHOTOS.indexOf(src))}" loading="lazy" decoding="async" />`;
+      fig.tabIndex = 0;
+      fig.setAttribute("role", "button");
+      const open = () => openPhoto(PHOTOS.indexOf(src), fig);
+      fig.addEventListener("click", open);
+      fig.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
       sec.appendChild(fig);
     });
   });
@@ -416,7 +429,12 @@ let photoIdx = 0;
 
 function showPhoto(i) {
   photoIdx = i;
-  photoImg.src = PHOTOS[i];
+  const full = PHOTOS[i];
+  photoImg.src = thumb(full);           // appears instantly (already loaded in the grid)
+  photoImg.onerror = () => { photoImg.onerror = null; photoImg.src = full; };
+  const hi = new Image();
+  hi.onload = () => { if (photoIdx === i) photoImg.src = full; };
+  hi.src = full;
   const cap = photoCaption(PHOTOS[i], i);
   photoImg.alt = cap;
   photoCap.textContent = cap;
@@ -428,10 +446,31 @@ function openPhoto(i, card) {
   }
   showPhoto(i);
   openModal(photoModal);
+  zoomFrom(card);
+}
+// the photo grows out of the one she tapped
+function zoomFrom(card) {
+  if (reduceMotion || !card) return;
+  const from = ($("img", card) || card).getBoundingClientRect();
+  const fig = $(".modal-figure", photoModal);
+  const run = () => {
+    const to = photoImg.getBoundingClientRect();
+    if (!to.width) return;
+    const sx = from.width / to.width, sy = from.height / to.height;
+    const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+    const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+    photoImg.animate(
+      [{ transform: `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`, opacity: .6 },
+       { transform: "none", opacity: 1 }],
+      { duration: 480, easing: "cubic-bezier(.2, 1.1, .3, 1)" });
+    $("figcaption", fig).animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 400, delay: 250, fill: "backwards" });
+  };
+  if (photoImg.complete && photoImg.naturalWidth) run(); else photoImg.addEventListener("load", run, { once: true });
 }
 function stepPhoto(dir) {
   if (!PHOTOS.length) return;
   showPhoto((photoIdx + dir + PHOTOS.length) % PHOTOS.length);
+  if (!reduceMotion) photoImg.animate([{ opacity: 0, transform: `translateX(${dir * 40}px) rotate(${dir * 2}deg)` }, { opacity: 1, transform: "none" }], { duration: 350, easing: "ease-out" });
 }
 $("#photo-prev").addEventListener("click", (e) => { e.stopPropagation(); stepPhoto(-1); });
 $("#photo-next").addEventListener("click", (e) => { e.stopPropagation(); stepPhoto(1); });
@@ -455,9 +494,12 @@ function openModal(m) {
 }
 function closeModal() {
   if (!openedModal) return;
-  openedModal.hidden = true;
+  const m = openedModal;
   openedModal = null;
   document.body.style.overflow = "";
+  if (reduceMotion) { m.hidden = true; return; }
+  m.classList.add("closing");
+  setTimeout(() => { m.hidden = true; m.classList.remove("closing"); }, 220);
 }
 $$(".modal").forEach((m) => {
   m.addEventListener("click", (e) => {
@@ -494,7 +536,12 @@ function typeText(el, text, speed = 55) {
 }
 
 function blowCandle() {
-  if (cake.classList.contains("out")) return;
+  if (cake.classList.contains("out")) {
+    // after the wish, every tap throws more confetti 🎉
+    cake.classList.remove("hop"); void cake.offsetWidth; cake.classList.add("hop");
+    streamers(innerWidth < 600 ? 40 : 70);
+    return;
+  }
   cakeTaps++;
   if (cakeTaps === 1) {
     // first tap: nothing happens yet, just a little nudge
@@ -504,6 +551,7 @@ function blowCandle() {
     return;
   }
   clearInterval(typeTimer);
+  celebrate();
   cake.classList.add("out");
   $("#finale").classList.add("wished");
   heartBurst();
@@ -531,3 +579,84 @@ function heartBurst() {
     setTimeout(() => s.remove(), 5500);
   }
 }
+
+/* ============================================================
+   Celebration: cake hop, sparkles, streamers, bunting
+   ============================================================ */
+function celebrate() {
+  cake.classList.remove("shake", "hop"); void cake.offsetWidth; cake.classList.add("hop");
+  sparkles();
+  $("#finale").classList.add("party");
+  if (reduceMotion) return;
+  streamers(innerWidth < 600 ? 70 : 130);
+  setTimeout(() => streamers(innerWidth < 600 ? 40 : 80), 1300);
+}
+
+function sparkles() {
+  if (reduceMotion) return;
+  const box = document.createElement("div");
+  box.className = "sparkles";
+  cake.appendChild(box);
+  const n = 14;
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement("span");
+    s.textContent = i % 3 ? "✦" : "♥";
+    const a = (i / n) * Math.PI * 2;
+    const r = rand(90, 140);
+    s.style.color = ["var(--burgundy)", "var(--rose)", "#e8c27a"][i % 3];
+    box.appendChild(s);
+    s.animate(
+      [{ transform: "translate(-50%, -50%) scale(.2)", opacity: 1 },
+       { transform: `translate(calc(-50% + ${Math.cos(a) * r}px), calc(-50% + ${Math.sin(a) * r}px)) scale(1.2) rotate(${rand(-90, 90)}deg)`, opacity: 1, offset: .7 },
+       { transform: `translate(calc(-50% + ${Math.cos(a) * r * 1.15}px), calc(-50% + ${Math.sin(a) * r * 1.15 + 20}px)) scale(.6)`, opacity: 0 }],
+      { duration: 1300, easing: "cubic-bezier(.2, .8, .3, 1)", fill: "forwards" });
+  }
+  setTimeout(() => box.remove(), 1500);
+}
+
+// paper streamers & ribbons that shoot up from both bottom corners and flutter down
+function streamers(count) {
+  if (reduceMotion) return;
+  const box = $("#confetti");
+  const colors = ["#8b1e3f", "#c95b72", "#e9a3b0", "#ddb994", "#e8c27a", "#ffffff", "#f3c6cf"];
+  const W = innerWidth, H = innerHeight;
+  for (let i = 0; i < count; i++) {
+    const left = i % 2 === 0;
+    const el = document.createElement("span");
+    const kind = Math.random();
+    el.className = "streamer " + (kind < 0.25 ? "curl" : kind < 0.55 ? "long" : "bit");
+    el.style.background = colors[i % colors.length];
+    el.style.left = left ? "-10px" : W + 10 + "px";
+    el.style.top = H + 10 + "px";
+    box.appendChild(el);
+    const dir = left ? 1 : -1;
+    const peakX = dir * rand(W * 0.15, W * 0.7);
+    const peakY = -rand(H * 0.55, H * 1.05);
+    const endX = peakX + dir * rand(20, 160);
+    const spin = rand(360, 1080) * (Math.random() < 0.5 ? -1 : 1);
+    const dur = rand(2600, 4200);
+    el.animate(
+      [{ transform: `translate(0, 0) rotate(0deg) rotateX(0deg)` },
+       { transform: `translate(${peakX}px, ${peakY}px) rotate(${spin * 0.4}deg) rotateX(${spin}deg)`, offset: 0.32, easing: "cubic-bezier(.3, 0, .6, 1)" },
+       { transform: `translate(${endX}px, 20px) rotate(${spin}deg) rotateX(${spin * 3}deg)` }],
+      { duration: dur, delay: rand(0, 350), easing: "cubic-bezier(.15, .7, .4, 1)", fill: "both" }
+    ).onfinish = () => el.remove();
+  }
+}
+
+// little paper flags along the bunting string
+(function buildBunting() {
+  const g = $(".bunting .flags");
+  if (!g) return;
+  const colors = ["#8b1e3f", "#f3c6cf", "#ddb994", "#c95b72", "#fffdf9", "#e8c27a"];
+  const n = innerWidth < 600 ? 11 : 19;
+  let html = "";
+  for (let i = 0; i < n; i++) {
+    const t = (i + 0.5) / n;
+    const x = (1 - t) * (1 - t) * 0 + 2 * (1 - t) * t * 500 + t * t * 1000;
+    const y = (1 - t) * (1 - t) * 10 + 2 * (1 - t) * t * 110 + t * t * 10;
+    const w = 1000 / n * 0.42;
+    html += `<polygon points="${x - w},${y} ${x + w},${y} ${x},${y + 52}" fill="${colors[i % colors.length]}" stroke="rgba(139,30,63,.12)" style="animation-delay:${(-i * 0.37).toFixed(2)}s"/>`;
+  }
+  g.innerHTML = html;
+})();
