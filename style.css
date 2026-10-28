@@ -463,6 +463,11 @@ button { font: inherit; color: inherit; }
 .finale-title .w { display: inline-block; opacity: 0; transform: translateY(.4em) scale(.6); transition: opacity .6s ease, transform .8s cubic-bezier(.2, 1.6, .4, 1); }
 .finale-title .w:nth-child(2) { transition-delay: .2s; }
 .finale-title .w:nth-child(4) { transition-delay: .45s; }
+.finale-title .w:nth-child(6) { transition-delay: .75s; }
+.finale-title .fav { font-size: .5em; font-weight: 800; color: var(--ink-soft); margin: .35em 0 .1em; }
+.finale-title .emo { display: inline-block; font-size: .85em; }
+.finale.wished .finale-title .emo { animation: emo-love 1.4s ease-in-out 1.4s infinite; }
+@keyframes emo-love { 0%,100% { transform: scale(1) rotate(0); } 20% { transform: scale(1.25) rotate(-8deg); } 40% { transform: scale(1) rotate(0); } 55% { transform: scale(1.15) rotate(6deg); } 70% { transform: scale(1); } }
 .finale.wished .finale-title .w { opacity: 1; transform: none; }
 .finale-line {
   margin: .6em 0 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.25rem, 5vw, 1.8rem); line-height: 1.3;

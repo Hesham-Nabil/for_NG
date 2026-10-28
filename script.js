@@ -10,7 +10,7 @@ const CONFIG = {
   letter: {
     hello: "My Anouge 🤍",
     body: [
-      "Happy birthday, habibti.",
+      "Happy birthday, habebty.",
       "I've tried to write this so many times, and nothing ever sounds good enough for you. So I'll just say it the way I feel it.",
       "You make everything lighter. You're the first thing I think about when I wake up and the last thing on my mind before I sleep, and I wouldn't want it any other way.",
       "Thank you for your patience with me, for your laugh, and for believing in me even on the days I didn't.",
