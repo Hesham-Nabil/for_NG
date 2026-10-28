@@ -71,7 +71,7 @@ const CONFIG = {
     "shopping dates", "all dressed up", "cheering together 🇪🇬", "board game dates 🎲",
     "car selfies forever", "co-pilot of my life", "little adventures", "late-night drives",
     "snowfall with you", "Brooklyn Bridge with you 🌉", "you & your teddy 🧸", "my favorite selfie",
-    "celebrating you", "E & H ♥", "kids at heart", "coffee dates ☕", "my graduate 🎓",
+    "my biggest cheerleader 🎓", "E & H ♥", "kids at heart", "coffee dates ☕", "my graduate 🎓",
   ],
   photosPerPage: 24,
   // Extra captions for any photos beyond the list above
