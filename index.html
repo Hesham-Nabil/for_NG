@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>For You 🌙</title>
+  <meta name="description" content="A little something made just for you." />
+  <meta name="theme-color" content="#120d26" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💛</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500..900,0..100,0..1&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked">
+
+  <!-- background song -->
+  <audio id="bg-music" src="assets/lovesong.mp3" loop preload="auto"></audio>
+
+  <!-- ============ INTRO GATE ============ -->
+  <section id="gate" class="gate">
+    <div class="stars" data-count="90"></div>
+    <div class="moon"><span></span><span></span><span></span></div>
+    <div class="gate-inner">
+      <p class="gate-kicker">psst…</p>
+      <h1 class="gate-title">I made something<br />for <span class="her-name">you</span></h1>
+      <button id="open-btn" class="open-btn" type="button">
+        <span class="open-heart">♥</span> tap to open
+      </button>
+      <p class="gate-hint">turn your sound on 🎧</p>
+    </div>
+  </section>
+
+  <!-- ============ MAIN ============ -->
+  <main id="main">
+
+    <!-- hero -->
+    <section class="hero scene scene--dusk" id="hero">
+      <div class="stars" data-count="60"></div>
+      <div class="floaties" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <h1 class="hb" id="hb-title" aria-label="Happy Birthday"></h1>
+        <p class="hero-name"><span class="her-name">you</span></p>
+        <p class="hero-sub">this little corner of the internet is all yours</p>
+      </div>
+      <a class="scroll-cue" href="#story" aria-label="Scroll down">
+        <span>scroll</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- love message scenes (filled from script.js) -->
+    <div id="story"></div>
+
+    <!-- gallery -->
+    <section class="section gallery-section" id="gallery">
+      <div class="stars" data-count="50"></div>
+      <header class="section-head">
+        <p class="section-kicker">our favorite moments</p>
+        <h2 class="section-title"><span class="c-orange">us</span>, <span class="c-blue">in</span> <span class="c-pink">pictures</span></h2>
+      </header>
+      <div class="polaroids" id="photo-grid"></div>
+    </section>
+
+    <!-- vlogs -->
+    <section class="section vlog-section" id="vlogs">
+      <header class="section-head">
+        <p class="section-kicker">press play, the song will wait for us</p>
+        <h2 class="section-title"><span class="c-yellow">our</span> <span class="c-red">vlogs</span> <span class="c-purple">&amp;</span> <span class="c-green">recaps</span></h2>
+      </header>
+      <div class="vlog-grid" id="vlog-grid"></div>
+    </section>
+
+    <!-- finale -->
+    <section class="scene scene--moon finale" id="finale">
+      <div class="stars" data-count="120"></div>
+      <div class="moon big"><span></span><span></span><span></span></div>
+      <div class="finale-inner">
+        <p class="finale-kicker">one last thing…</p>
+        <div class="cake" id="cake" role="button" tabindex="0" aria-label="Blow out the candle">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="tier tier-top"></div>
+          <div class="tier tier-bottom"></div>
+          <div class="plate"></div>
+        </div>
+        <p class="wish-hint" id="wish-hint">tap the cake &amp; make a wish ✨</p>
+        <h2 class="finale-title" id="finale-title">
+          <span class="w c-pink">happy</span> <span class="w c-orange">birthday,</span><br />
+          <span class="w c-yellow her-name">you</span>
+        </h2>
+        <p class="signature">forever yours, <span id="from-name">me</span> ♥</p>
+      </div>
+      <svg class="hill" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 60 L0 34 Q110 6 200 10 Q300 14 400 30 L400 60 Z" />
+      </svg>
+      <svg class="couple" viewBox="0 0 80 50" aria-hidden="true">
+        <!-- him -->
+        <circle cx="30" cy="11" r="8" />
+        <path d="M16 50 Q14 28 23 21 Q30 17 38 21 Q46 28 46 50 Z" />
+        <!-- her, head resting on his shoulder -->
+        <path d="M45 10 Q51 3 58 9 Q62 20 59 31 L54 27 Q48 19 45 10 Z" />
+        <circle cx="51" cy="15" r="7.2" />
+        <path d="M42 50 Q41 31 49 25 Q56 21 63 26 Q70 32 69 50 Z" />
+      </svg>
+    </section>
+  </main>
+
+  <!-- floating music button -->
+  <button id="music-btn" class="music-btn" type="button" aria-label="Pause music" hidden>
+    <span class="vinyl"><span class="vinyl-label">♥</span></span>
+    <span class="music-note" aria-hidden="true">♪</span>
+  </button>
+  <div class="now-playing" id="now-playing" hidden>Lovesong · Adele</div>
+
+  <!-- photo lightbox -->
+  <div class="modal" id="photo-modal" hidden>
+    <button class="modal-close" data-close aria-label="Close">×</button>
+    <button class="modal-nav prev" id="photo-prev" aria-label="Previous photo">‹</button>
+    <figure class="modal-figure">
+      <img id="photo-modal-img" alt="" />
+      <figcaption id="photo-modal-cap"></figcaption>
+    </figure>
+    <button class="modal-nav next" id="photo-next" aria-label="Next photo">›</button>
+  </div>
+
+  <!-- video player -->
+  <div class="modal" id="video-modal" hidden>
+    <button class="modal-close" data-close aria-label="Close">×</button>
+    <div class="video-wrap">
+      <video id="video-player" controls playsinline preload="metadata"></video>
+      <p class="video-title" id="video-title"></p>
+    </div>
+  </div>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
