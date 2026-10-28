@@ -4,20 +4,7 @@ A birthday website: a kraft envelope with a letter inside, a love message reveal
 
 ## Add photos → `photos/`
 Upload them into the `photos` folder (any number). They show up automatically in the gallery **and** as little polaroids while scrolling.
-Name them `01.jpg`, `02.jpg` … so they appear in this order with these captions:
-
-| file | caption |
-|---|---|
-| 01 | where it all started |
-| 02 | my favorite smile |
-| 03 | that one perfect day |
-| 04 | us being silly |
-| 05 | golden hour with you |
-| 06 | late night talks |
-| 07 | my safe place |
-| 08 | adventure buddies |
-| 09 | you, being beautiful |
-| 10 | to many more ♥ |
+Name them `01.jpg` … `24.jpg`. They appear in that order (6 per row on a laptop, 3 on a phone), each with its caption from `photoCaptions` at the top of `script.js`.
 
 ## Add vlogs / recaps → `videos/`
 Upload `.mp4` (or `.mov`/`.webm`) files. The file name becomes the title, so `summer-recap.mp4` shows as "summer recap".

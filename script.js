@@ -62,7 +62,10 @@ const CONFIG = {
   photoCaptions: [
     "where it all started", "my favorite smile", "that one perfect day", "us being silly",
     "golden hour with you", "late night talks", "my safe place", "adventure buddies",
-    "you, being beautiful", "to many more ♥",
+    "you, being beautiful", "our little adventures", "next to you is my favorite place", "that laugh though",
+    "home is wherever you are", "the day I just knew", "my sunshine", "pure happiness",
+    "my whole heart", "best company", "stolen moments", "you & me, always",
+    "core memory", "my person", "still my favorite view", "to many more ♥",
   ],
   // Extra captions for any photos beyond the list above
   moreCaptions: ["us ♥", "my favorite view", "my person", "core memory", "you & me", "always us"],
@@ -222,13 +225,13 @@ function photoCaption(path, idx) {
 function renderGallery() {
   const grid = $("#photo-grid");
   grid.innerHTML = "";
-  const list = PHOTOS.length ? PHOTOS : Array.from({ length: 10 }, () => null);
+  const list = PHOTOS.length ? PHOTOS : Array.from({ length: CONFIG.photoCaptions.length }, () => null);
   list.forEach((src, idx) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "polaroid " + (src ? "has-media" : "missing");
     btn.style.setProperty("--rot", (idx % 2 ? 1 : -1) * rand(1.5, 4) + "deg");
-    btn.style.setProperty("--delay", (idx % 5) * 0.08 + "s");
+    btn.style.setProperty("--delay", (idx % 6) * 0.07 + "s");
     const [c1, c2] = PH_COLORS[idx % PH_COLORS.length];
     const cap = src ? photoCaption(src, idx) : defaultCaption(idx);
     btn.innerHTML = `
