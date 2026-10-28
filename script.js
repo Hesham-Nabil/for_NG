@@ -81,7 +81,7 @@ $(".finale-line").textContent = CONFIG.finaleLine;
 (function buildHero() {
   const h = $("#hb-title");
   let i = 0;
-  [["he made you", "ink"], ["a whole website", "burgundy"]].forEach(([line, color]) => {
+  [["happy birthday,", "ink"], [CONFIG.herName + " ♥", "burgundy"]].forEach(([line, color]) => {
     const row = document.createElement("span");
     row.className = "row c-" + color;
     [...line].forEach((ch) => {

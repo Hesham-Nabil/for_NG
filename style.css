@@ -269,14 +269,15 @@ button { font: inherit; color: inherit; }
    ============================================================ */
 .hero-inner { position: relative; z-index: 1; }
 .hero-pov {
-  margin: 0; font-family: var(--display); font-weight: 900; font-size: clamp(2.4rem, 11vw, 5rem); line-height: 1;
+  margin: 0 0 .3em; font-family: var(--hand); font-weight: 700; font-size: clamp(1.6rem, 6.5vw, 2.4rem); line-height: 1; color: var(--rose);
   opacity: 0; transform: translateY(14px); transition: all .7s ease .1s;
 }
 .hb {
   margin: .05em 0 0; font-family: var(--display); font-weight: 900; letter-spacing: -.02em;
-  font-size: clamp(2.3rem, 11.4vw, 6.6rem); line-height: 1;
+  font-size: clamp(2.2rem, 10.6vw, 7rem); line-height: 1.02;
 }
 .hb .row { display: block; white-space: nowrap; }
+.hb .row.c-burgundy { font-size: 1.35em; margin-top: .05em; }
 .hb .l { display: inline-block; opacity: 0; transform: translateY(.5em) scale(.5); }
 .hb .sp { display: inline-block; width: .26em; }
 .hb.go .l { animation: pop .7s cubic-bezier(.2, 1.6, .4, 1) forwards; animation-delay: calc(var(--i) * 45ms + .5s); }
@@ -288,10 +289,10 @@ button { font: inherit; color: inherit; }
 }
 .hero-name .her-name { color: var(--burgundy); }
 .hero-sub {
-  margin: .4em auto 0; max-width: 30ch; color: var(--ink-soft); font-size: clamp(1rem, 3.6vw, 1.12rem);
-  opacity: 0; transition: opacity 1s ease 2.4s;
+  margin: 1.1em auto 0; max-width: 30ch; color: var(--ink-soft); font-size: clamp(1rem, 3.6vw, 1.12rem);
+  opacity: 0; transition: opacity 1s ease 1.8s;
 }
-.hero.in .hero-pov, .hero.in .hero-name { opacity: 1; transform: none; }
+.hero.in .hero-pov { opacity: 1; transform: none; }
 .hero.in .hero-sub { opacity: 1; }
 
 .floaties { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
