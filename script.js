@@ -60,18 +60,18 @@ const CONFIG = {
   // Just upload files there (any names). Supported: jpg, jpeg, png, webp, gif / mp4, webm, mov
   // Photos are shown in file-name order (01.jpg, 02.jpg, …) and get these captions in the same order.
   photoCaptions: [
-    "where it all started", "my favorite smile", "that one perfect day", "us being silly",
-    "golden hour with you", "late night talks", "my safe place", "adventure buddies",
-    "you, being beautiful", "our little adventures", "next to you is my favorite place", "that laugh though",
-    "home is wherever you are", "the day I just knew", "my sunshine", "pure happiness",
-    "my whole heart", "best company", "stolen moments", "you & me, always",
-    "core memory", "my person", "still my favorite view", "to many more ♥",
+    "candlelight & you", "evening strolls with you", "our Philly adventure", "my favorite smile",
+    "our special day 💍", "you in red… wow", "my forever person", "golden hour with you",
+    "road trips with you", "late-night food runs", "dinner dates with you", "colorful days with you",
+    "us being silly 😎", "sunset drives", "my safe place", "date night",
+    "so proud of you 🎓", "you're my favorite channel", "our kind of night out", "the way you make me laugh",
+    "my favorite passenger", "snowy days with you ❄️", "night walks with you", "to many more ♥",
   ],
+  photosPerPage: 12,
   // Extra captions for any photos beyond the list above
   moreCaptions: ["us ♥", "my favorite view", "my person", "core memory", "you & me", "always us"],
   // Optional: caption a specific file by name, e.g. "beach.jpg": "our beach day" (works for videos too)
   captions: {},
-  videoPlaceholders: 6,
   // where the site lives on GitHub (used to read the folders)
   github: { owner: "Hesham-Nabil", repo: "for_NG", branch: "main" },
 };
@@ -222,16 +222,23 @@ function photoCaption(path, idx) {
   return CONFIG.captions[name] || defaultCaption(idx);
 }
 
-function renderGallery() {
+let galleryPage = 0;
+function renderGallery(scroll) {
   const grid = $("#photo-grid");
+  const pager = $("#pager");
   grid.innerHTML = "";
   const list = PHOTOS.length ? PHOTOS : Array.from({ length: CONFIG.photoCaptions.length }, () => null);
-  list.forEach((src, idx) => {
+  const per = CONFIG.photosPerPage;
+  const pages = Math.max(1, Math.ceil(list.length / per));
+  galleryPage = Math.min(galleryPage, pages - 1);
+  const start = galleryPage * per;
+  list.slice(start, start + per).forEach((src, k) => {
+    const idx = start + k;
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "polaroid " + (src ? "has-media" : "missing");
     btn.style.setProperty("--rot", (idx % 2 ? 1 : -1) * rand(1.5, 4) + "deg");
-    btn.style.setProperty("--delay", (idx % 6) * 0.07 + "s");
+    btn.style.setProperty("--delay", (k % 6) * 0.07 + "s");
     const [c1, c2] = PH_COLORS[idx % PH_COLORS.length];
     const cap = src ? photoCaption(src, idx) : defaultCaption(idx);
     btn.innerHTML = `
@@ -245,8 +252,24 @@ function renderGallery() {
       </figure>`;
     btn.addEventListener("click", () => openPhoto(idx, btn));
     grid.appendChild(btn);
-    io.observe(btn);
+    if (scroll) requestAnimationFrame(() => btn.classList.add("in")); else io.observe(btn);
   });
+  // page buttons
+  pager.hidden = pages < 2;
+  pager.innerHTML = "";
+  if (pages < 2) return;
+  const mk = (label, page, extra = "") => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "pg " + extra;
+    b.innerHTML = label;
+    if (page === null) { b.disabled = true; return b; }
+    b.addEventListener("click", () => { galleryPage = page; renderGallery(true); $("#gallery").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); });
+    return b;
+  };
+  pager.append(mk("‹ prev", galleryPage > 0 ? galleryPage - 1 : null, "arrow"));
+  for (let p = 0; p < pages; p++) pager.append(mk(String(p + 1), p, p === galleryPage ? "on" : ""));
+  pager.append(mk("next ›", galleryPage < pages - 1 ? galleryPage + 1 : null, "arrow"));
 }
 
 function addSnippets() {
@@ -283,46 +306,6 @@ function addSnippets() {
   }
 }
 
-/* ---------- vlogs ---------- */
-const PLAY_SVG = `<svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>`;
-const VLOG_COLORS = [["#f6d6da", "#f3e3d3"], ["#efe2d2", "#f8dde0"], ["#fbe4dc", "#f1d9c4"], ["#f8dfe2", "#efe2d2"]];
-
-function renderVlogs(videos) {
-  const grid = $("#vlog-grid");
-  grid.innerHTML = "";
-  const list = videos.length ? videos : Array.from({ length: CONFIG.videoPlaceholders }, () => null);
-  list.forEach((src, idx) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "vlog " + (src ? "has-media" : "missing");
-    card.style.setProperty("--delay", (idx % 2) * 0.1 + "s");
-    const [c1, c2] = VLOG_COLORS[idx % 4];
-    const title = src ? (CONFIG.captions[fileName(src)] || prettyTitle(src) || `recap #${idx + 1}`) : "video coming soon";
-    card.innerHTML = `
-      <div class="thumb">
-        ${src ? "" : `<div class="placeholder" style="--pc1:${c1};--pc2:${c2}"><span class="ph-heart">▶</span>add a vlog to the videos folder</div>`}
-        <span class="play">${PLAY_SVG}</span>
-      </div>
-      <div class="vlog-meta"><h3>${title}</h3><p>${src ? "tap to watch ♥" : "soon ♥"}</p></div>`;
-    if (src) {
-      const probe = document.createElement("video");
-      probe.muted = true;
-      probe.playsInline = true;
-      probe.preload = "metadata";
-      probe.src = src + "#t=0.5";
-      probe.setAttribute("aria-hidden", "true");
-      probe.tabIndex = -1;
-      $(".thumb", card).prepend(probe);
-      card.addEventListener("click", () => openVideo(src, title));
-    } else {
-      card.addEventListener("click", () =>
-        card.animate([{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }], { duration: 300 }));
-    }
-    grid.appendChild(card);
-    io.observe(card);
-  });
-}
-
 /* ============================================================
    Reveal on scroll
    ============================================================ */
@@ -335,12 +318,10 @@ storyScenes.forEach((el) => io.observe(el));
 
 // first paint with placeholders, then fill from the folders
 renderGallery();
-renderVlogs([]);
 listFolder("photos", IMG_EXT).then((list) => {
   PHOTOS = list;
   if (list.length) { renderGallery(); addSnippets(); }
 });
-listFolder("videos", VID_EXT).then((list) => { if (list.length) renderVlogs(list); });
 
 /* ============================================================
    Music: plays in the background, pauses while any video plays
@@ -464,20 +445,6 @@ photoModal.addEventListener("touchend", (e) => {
   touchX = null;
 });
 
-/* ============================================================
-   Video modal
-   ============================================================ */
-const videoModal = $("#video-modal");
-const player = $("#video-player");
-
-function openVideo(src, title) {
-  player.src = src;
-  $("#video-title").textContent = title;
-  openModal(videoModal);
-  const p = player.play();
-  if (p && p.catch) p.catch(() => {});
-}
-
 /* ---------- shared modal behaviour ---------- */
 let openedModal = null;
 function openModal(m) {
@@ -488,12 +455,6 @@ function openModal(m) {
 }
 function closeModal() {
   if (!openedModal) return;
-  if (openedModal === videoModal) {
-    player.pause();
-    player.removeAttribute("src");
-    player.load();
-    maybeResumeMusic();
-  }
   openedModal.hidden = true;
   openedModal = null;
   document.body.style.overflow = "";
@@ -546,22 +507,8 @@ function blowCandle() {
   cake.classList.add("out");
   $("#finale").classList.add("wished");
   heartBurst();
-  showBirthdayVideo();
 }
 
-let BDAY_SRC = null;
-listFolder("birthday", VID_EXT).then((list) => { BDAY_SRC = list[0] || null; });
-function showBirthdayVideo() {
-  const box = $("#bday-video");
-  const reveal = () => {
-    if (!BDAY_SRC) return;
-    $("#bday-player").src = BDAY_SRC + "#t=0.1";
-    box.hidden = false;
-    requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add("show")));
-    setTimeout(() => box.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" }), 900);
-  };
-  setTimeout(reveal, 2600);
-}
 cake.addEventListener("click", blowCandle);
 cake.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); blowCandle(); } });
 

@@ -72,19 +72,11 @@
     <!-- gallery -->
     <section class="section gallery-section" id="gallery">
       <header class="section-head">
-        <p class="section-kicker">our favorite moments</p>
+        <p class="section-kicker">our favorite moments (tap one to see it big)</p>
         <h2 class="section-title">us, <span class="c-burgundy">in pictures</span></h2>
       </header>
       <div class="polaroids" id="photo-grid"></div>
-    </section>
-
-    <!-- vlogs -->
-    <section class="section vlog-section" id="vlogs">
-      <header class="section-head">
-        <p class="section-kicker">press play, the song will wait for us</p>
-        <h2 class="section-title">our <span class="c-burgundy">vlogs &amp; recaps</span></h2>
-      </header>
-      <div class="vlog-grid" id="vlog-grid"></div>
+      <nav class="pager" id="pager" aria-label="Gallery pages" hidden></nav>
     </section>
 
     <!-- finale -->
@@ -105,12 +97,6 @@
         </h2>
         <p class="finale-line"></p>
         <p class="signature">forever yours, <span id="from-name">me</span> ♥</p>
-        <div class="bday-video" id="bday-video" hidden>
-          <p class="bday-kicker">and one more surprise… 🎂</p>
-          <div class="bday-frame">
-            <video id="bday-player" controls playsinline preload="metadata"></video>
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -131,15 +117,6 @@
       <figcaption id="photo-modal-cap"></figcaption>
     </figure>
     <button class="modal-nav next" id="photo-next" aria-label="Next photo">›</button>
-  </div>
-
-  <!-- video player -->
-  <div class="modal" id="video-modal" hidden>
-    <button class="modal-close" data-close aria-label="Close">×</button>
-    <div class="video-wrap">
-      <video id="video-player" controls playsinline preload="metadata"></video>
-      <p class="video-title" id="video-title"></p>
-    </div>
   </div>
 
   <div class="confetti" id="confetti" aria-hidden="true"></div>
