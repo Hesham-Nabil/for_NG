@@ -5,24 +5,41 @@ const CONFIG = {
   herName: "my love",        // her name or nickname
   fromName: "Hesham",        // how you sign it
 
+  // 💌 The letter that comes out of the envelope (Arabic)
+  letter: {
+    hello: "إلى أحلى حد في الدنيا 🤍",
+    body: [
+      "كل سنة وانتي طيبة يا حبيبتي، وكل سنة وانتي معايا.",
+      "عملتلك الحتة الصغيرة دي من الإنترنت عشان أقولك كل الكلام اللي ساعات بيقف على لساني ومش بعرف أقوله.",
+      "علّي الصوت، وانزلي على مهلك… كل حاجة هنا معمولة عشانك.",
+    ],
+    sign: "— بحبك، هشام",
+  },
+  finaleArabic: "وكل سنة وانتي حبيبتي 🤍",
+
   // The love message: one scene per screen, revealed word by word.
   // Wrap a word in *stars* to make it BIG. Use " / " to force a line break.
   // theme options: sunset, night, rain, dusk, field, sunrise, moon
+  // add  lang: "ar"  for an Arabic scene (right-to-left, Arabic font)
   scenes: [
-    { theme: "sunset",  tag: "okay, deep breath…",
-      text: "*I'm* not great at saying this out loud, / so I made you a *whole* *website* instead" },
-    { theme: "night",   tag: "out of everyone",
-      text: "*somehow* I got lucky enough / to *get* *you*" },
-    { theme: "rain",    tag: "on the hard days",
-      text: "*you* are the calm / I keep coming back to" },
-    { theme: "field",   tag: "you have this way of",
-      text: "making the *ordinary* days / feel like my *favorite* memories" },
-    { theme: "dusk",    tag: "things I adore",
-      text: "your *laugh*, / the way you *care*, / and how you make everything *softer*" },
-    { theme: "sunrise", tag: "so here's my promise",
-      text: "I'll keep *learning* you, keep *choosing* you, / and keep showing *up* for you" },
-    { theme: "night",   tag: "and just so you know",
-      text: "*every* day with you is a *gift* / but today, *you're* the one who gets spoiled" },
+    { theme: "sunset",  lang: "ar", tag: "كلام جوايا عمري ما قلتهولك",
+      text: "*عارف* إني مش كامل / بس نفسي أكون *كل* حاجة *حلمتي* بيها" },
+    { theme: "night",   lang: "ar",
+      text: "*نفسي* أكون الراجل اللي *فاهمك* / مش بس في الحاجات *الكبيرة* / لكن في *أصغر* التفاصيل" },
+    { theme: "field",   lang: "ar",
+      text: "*قوليلي* إيه اللي بيضحكك / وإيه اللي بيحسسك *بالأمان* / *وعلميني* أحبك إزاي" },
+    { theme: "dusk",    lang: "ar",
+      text: "مش عايز *أفترض* إني عارف / *سعادتك* بالنسبالي / هي *كل* حاجة" },
+    { theme: "sunrise", lang: "ar",
+      text: "*عايز* أكون اللي *موجود* دايمًا / اللي بيعملها *صح* / *وبيتعلم* من غلطه" },
+    { theme: "rain",    lang: "ar",
+      text: "*وهفضل* دايمًا مستعد *أكبر* / *وأحبك* أعمق من *إمبارح*" },
+    { theme: "night",   lang: "ar",
+      text: "*احكيلي* عن *أحلامك* / وعن *خوفك* / *وأوعدك* هكون *جنبك*" },
+    { theme: "dusk",    lang: "ar",
+      text: "*انتي* تستاهلي حب *يليق* بيكي / *وأنا* مستعد أعمل *أي* حاجة / عشان أكون *الشخص* ده ليكي" },
+    { theme: "moon",    lang: "ar",
+      text: "*عشان* انتي / *رقم* *واحد* عندي 🤍" },
   ],
 
   // 📸 Photos: drop your pictures in the /photos folder with these names
@@ -63,6 +80,10 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 $$(".her-name").forEach((el) => (el.textContent = CONFIG.herName));
 $("#from-name").textContent = CONFIG.fromName;
 document.title = `For ${CONFIG.herName} 🌙`;
+$(".ar-hello").textContent = CONFIG.letter.hello;
+$(".ar-body").innerHTML = CONFIG.letter.body.map((t) => `<p>${t}</p>`).join("");
+$(".ar-sign").textContent = CONFIG.letter.sign;
+$(".finale-ar").textContent = CONFIG.finaleArabic;
 
 /* ---------- stars ---------- */
 function sprinkleStars(root = document) {
@@ -157,9 +178,10 @@ function decorFor(theme) {
   }
 }
 
-function buildWords(text) {
+function buildWords(text, lang) {
   const wrap = document.createElement("div");
-  wrap.className = "words";
+  wrap.className = "words" + (lang === "ar" ? " ar" : "");
+  if (lang === "ar") { wrap.dir = "rtl"; wrap.lang = "ar"; }
   let i = 0;
   let colorStart = Math.floor(rand(0, COLORS.length));
   text.split(/\s+/).forEach((tok) => {
@@ -169,7 +191,7 @@ function buildWords(text) {
       wrap.appendChild(br);
       return;
     }
-    const big = /^\*.*\*[,.!?]*$/.test(tok);
+    const big = /^\*.*\*[,.!?،]*$/.test(tok);
     const w = document.createElement("span");
     w.className = `w ${big ? "big" : ""} c-${COLORS[(colorStart + i) % COLORS.length]}`;
     w.textContent = tok.replace(/\*/g, "");
@@ -184,8 +206,9 @@ function buildWords(text) {
   CONFIG.scenes.forEach((sc) => {
     const sec = document.createElement("section");
     sec.className = `scene scene--${sc.theme} story-scene`;
-    sec.innerHTML = decorFor(sc.theme) + (sc.tag ? `<p class="scene-tag">${sc.tag}</p>` : "");
-    sec.appendChild(buildWords(sc.text));
+    const tagCls = sc.lang === "ar" ? "scene-tag ar" : "scene-tag";
+    sec.innerHTML = decorFor(sc.theme) + (sc.tag ? `<p class="${tagCls}">${sc.tag}</p>` : "");
+    sec.appendChild(buildWords(sc.text, sc.lang));
     story.appendChild(sec);
   });
 })();
@@ -336,12 +359,20 @@ musicBtn.addEventListener("click", () => {
 });
 
 /* ---------- gate ---------- */
+const gate = $("#gate");
 $("#open-btn").addEventListener("click", () => {
   musicOn = true;
   musicPlay();   // must start inside the tap so phones allow sound
-  $("#gate").classList.add("gone");
-  document.body.classList.remove("locked");
   musicBtn.hidden = false;
+  $("#envelope").classList.add("open");
+  setTimeout(() => gate.classList.add("letter-open"), 1500);
+  setTimeout(() => { gate.classList.add("letter-shown"); $("#letter-card").removeAttribute("aria-hidden"); }, 1900);
+});
+
+$("#letter-go").addEventListener("click", () => {
+  if (musicOn && music.paused) musicPlay();
+  gate.classList.add("gone");
+  document.body.classList.remove("locked");
   nowPlaying.hidden = false;
   setTimeout(() => nowPlaying.classList.add("hide"), 4500);
   $("#hb-title").classList.add("go");
