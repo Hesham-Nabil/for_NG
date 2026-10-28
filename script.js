@@ -8,13 +8,15 @@ const CONFIG = {
 
   // 💌 The letter that comes out of the envelope
   letter: {
-    hello: "To Engy, my favorite person 🤍",
+    hello: "My Anouge 🤍",
     body: [
-      "Happy birthday, my love.",
-      "I made you this little corner of the internet, because some things are easier to show than to say.",
-      "Turn your sound on, scroll slowly, and remember: every bit of this is for you.",
+      "Happy birthday, habibti.",
+      "I've tried to write this so many times, and nothing ever sounds good enough for you. So I'll just say it the way I feel it.",
+      "You make everything lighter. You're the first thing I think about when I wake up and the last thing on my mind before I sleep, and I wouldn't want it any other way.",
+      "Thank you for your patience with me, for your laugh, and for believing in me even on the days I didn't.",
+      "I stayed up way too late making this, just to see you smile today. Turn the sound up, take your time, and know that every little piece of it is you.",
     ],
-    sign: "— yours, always. Hesham",
+    sign: "Yours, always,\nHesham",
   },
 
   // The love message: one screen per scene, revealed word by word.
